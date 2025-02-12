@@ -20,6 +20,9 @@
 
 <script>
 export default {
+  async fetch() {
+    await this.$store.dispatch('setTitle', 'Inspire');
+  },
   name: 'InspirePage'
 }
 </script>

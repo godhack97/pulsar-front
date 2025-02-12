@@ -12,7 +12,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css' },
     ]
   },
 
@@ -51,9 +52,9 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/api/login', method: 'post', propertyName: 'token' },
-          user: { url: '/api/user', method: 'get', propertyName: 'user' },
-          logout: { url: '/api/logout', method: 'post' }
+          login: { url: '/login', method: 'post', propertyName: 'token' },
+          user: { url: '/user', method: 'get', propertyName: 'user' },
+          logout: { url: '/logout', method: 'post' }
         }
       }
     }
@@ -62,7 +63,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'http://localhost:8000/api',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -77,21 +78,34 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: true, // Используем тёмную тему по умолчанию
       themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+        light: { // Настройки светлой темы
+          primary: '#512828',
+          secondary: '#424242',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          warning: '#FFC107',
+          info: '#512828',
+          success: '#4CAF50'
+        },
+        dark: { // Настройки тёмной темы
+          primary: '#512828',
+          secondary: '#78909C',
+          accent: '#FF4081',
+          error: '#FF5252',
+          warning: '#FB8C00',
+          info: '#512828',
+          success: '#4CAF50'
         }
       }
-    }
+    },
+    options: {
+      icons: {
+        defaultSet: 'mdi', // Указывает использование Material Design Icons
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

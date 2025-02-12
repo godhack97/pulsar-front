@@ -1,17 +1,34 @@
 <!-- Авторизация / Логин -->
 <template>
-    <div>
+    <v-card class="authForm">
         <h1>Вход</h1>
-        <form @submit.prevent="login">
-            <input v-model="email" placeholder="Email" />
-            <input type="password" v-model="password" placeholder="Пароль" />
-            <button type="submit">Войти</button>
-        </form>
-    </div>
+        <v-form @submit.prevent="login">
+            <v-text-field v-model="email" label="email" required variant="solo-filled"></v-text-field>
+            <v-text-field v-model="password" type="password" label="password" required
+                variant="solo-filled"></v-text-field>
+            <v-btn type="submit" color="primary">LogIn</v-btn>
+        </v-form>
+    </v-card>
 </template>
 
+
+<style>
+
+.authForm{
+    width: 470px;
+    height: 300px;
+    padding: 20px;
+    top: 140px;
+    align-content: center;
+    margin: auto;
+}
+
+</style>
 <script>
 export default {
+    async fetch() {
+        await this.$store.dispatch('setTitle', 'LogIn');
+    },
     data() {
         return {
             email: '',
@@ -24,9 +41,10 @@ export default {
                 await this.$auth.loginWith('local', {
                     data: { email: this.email, password: this.password }
                 });
+
                 this.$router.push('/tasks');
             } catch (error) {
-                alert('Неверный email или пароль');
+                alert(error);
             }
         }
     }

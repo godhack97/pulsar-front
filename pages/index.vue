@@ -78,6 +78,9 @@
 
 <script>
 export default {
+  async fetch() {
+    await this.$store.dispatch('setTitle', 'Home');
+  },
   name: 'IndexPage'
 }
 </script>
